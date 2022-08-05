@@ -1,12 +1,12 @@
 import React from 'react';
 import {Text, View} from 'react-native';
 
-const DetailePage = () => {
+const Settings = () => {
   return (
     <View>
-      <Text>DetailPage</Text>
+      <Text>설정</Text>
     </View>
   );
 };
 
-export default DetailePage;
+export default Settings;
