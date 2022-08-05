@@ -30,7 +30,7 @@ function HomeScreen({navigation}: HomeScreenProps) {
     <>
       <View
         style={{
-          backgroundColor: 'red',
+          backgroundColor: 'blue',
           flex: 1,
           alignItems: 'center',
           justifyContent: 'center',
