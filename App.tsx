@@ -5,6 +5,7 @@ import {
   NativeStackScreenProps,
 } from '@react-navigation/native-stack';
 import {
+  Dimensions,
   Pressable,
   StyleSheet,
   Text,
@@ -45,9 +46,16 @@ function HomeScreen({navigation}: HomeScreenProps) {
             showModal(_modal => !_modal);
           }}
           style={styles.modal}>
-          <Text>Modal</Text>
           <View style={styles.modalInner}>
-            <Text>Modal</Text>
+            <Text>Modal Inner</Text>
+            <View style={{flexDirection: 'row', flex: 1, padding: 10}}>
+              <Pressable style={{flex: 1, alignItems: 'center'}}>
+                <Text>네</Text>
+              </Pressable>
+              <Pressable style={{flex: 1, alignItems: 'center'}}>
+                <Text>아니요</Text>
+              </Pressable>
+            </View>
           </View>
         </Pressable>
       )}
@@ -92,15 +100,19 @@ const styles = StyleSheet.create({
   modal: {
     backgroundColor: 'rgba(0,0,0,0.5)',
     ...StyleSheet.absoluteFillObject,
+    justifyContent: 'center',
   },
   modalInner: {
-    position: 'absolute',
     backgroundColor: 'orange',
-    top: 40,
-    bottom: 40,
-    right: 40,
-    left: 40,
-    boderRadius: 20,
+    height: 300,
+    marginHorizontal: 50,
+    width: Dimensions.get('window').width - 100,
+    borderRadius: 20,
+    padding: 20,
+    // shadowColor: 'black',
+    // shadowOpacity: 5,
+    // shadowOffset: {width: 5, height: 5},
+    elevation: 15,
   },
 });
 
