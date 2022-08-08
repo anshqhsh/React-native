@@ -36,7 +36,8 @@ const SignIn = ({navigation}: SignInScreenProps) => {
 
   const toSignUp = useCallback(() => {
     navigation.navigate('SignUp');
-  });
+  }, [navigation]);
+
   const canGoNext = email && password;
   return (
     <View>
@@ -86,7 +87,7 @@ const SignIn = ({navigation}: SignInScreenProps) => {
           disabled={!canGoNext}>
           <Text style={styles.loginBtnText}>로그인</Text>
         </Pressable>
-        <Pressable onPress={onSubmit} style={styles.loginBtn}>
+        <Pressable onPress={toSignUp} style={styles.loginBtn}>
           <Text style={styles.loginBtnText}>회원가입하기</Text>
         </Pressable>
       </View>
