@@ -123,7 +123,7 @@ function SignUp({navigation}: SignUpScreenProps) {
           <Text style={styles.loginButtonText}>회원가입</Text>
         </Pressable>
       </View>
-    </ㅇ>
+    </DismissKeyboardView>
   );
 }
 

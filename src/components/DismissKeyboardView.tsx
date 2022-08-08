@@ -16,10 +16,10 @@ import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
  */
 
 // React.FC = 함수컴포넌트 타입 <> 내부 props 타입 ViewStyle스타일의 타입 외워랏
-const DismissKeyboardView: React.FC<{style?: StyleProp<ViewStyle>}> = ({
-  children,
-  ...props
-}: any) => (
+const DismissKeyboardView: React.FC<{
+  children: React.ReactNode;
+  style?: StyleProp<ViewStyle>;
+}> = ({children, ...props}: any) => (
   <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
     <KeyboardAwareScrollView {...props} style={props.style}>
       {children}
