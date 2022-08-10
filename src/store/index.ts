@@ -17,4 +17,5 @@ export default store;
 
 // ts
 export type AppDispatch = typeof store.dispatch;
+// wrapping ts 때문에
 export const useAppDispatch = () => useDispatch<AppDispatch>();

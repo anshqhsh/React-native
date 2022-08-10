@@ -14,6 +14,19 @@ import {RootState} from './src/store/reducer';
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
+// 화면의 변수를 파라미터로
+export type LoggedInParamList = {
+  Orders: undefined;
+  Settings: undefined;
+  Delivery: undefined;
+  Complete: {orderId: string};
+};
+
+export type RootStackParamList = {
+  SignIn: undefined;
+  SignUp: undefined;
+};
+
 const AppInner = () => {
   const isLoggedIn = useSelector((state: RootState) => !!state.user.email);
 
