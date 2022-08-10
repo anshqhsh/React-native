@@ -59,8 +59,6 @@ function SignIn({navigation}: SignInScreenProps) {
         }),
       );
 
-      dispatch(userSlice.actions.setName(response.data.data.name));
-
       await EncryptedStorage.setItem(
         'refreshToken',
         response.data.data.refreshToken,
