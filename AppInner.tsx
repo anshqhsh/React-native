@@ -41,6 +41,38 @@ const AppInner = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
+    // request.use는 로컬스토리지 같은데서 token을 꺼낼때 사용
+    axios.interceptors.response.use(
+      response => {
+        console.log(response);
+        response;
+      },
+      async error => {
+        const {
+          config,
+          response: {status},
+        } = error;
+        if (status === 419) {
+          if (error.response.data.code === 'expired') {
+            const originalRequest = config;
+            const refreshToken = await EncryptedStorage.getItem('refreshToken');
+            const {data} = await axios.post(
+              `${Config.API_URL}/refreshToken`,
+              {},
+              {headers: {authorization: `Bearer ${refreshToken}`}},
+            );
+            // 새로운 토큰 저장
+            dispatch(userSlice.actions.setAccessToken(data.data.accessToken));
+            originalRequest.headers.authorization = `Bearer ${data.data.accessToken}`;
+            return axios(originalRequest);
+          }
+        }
+        return Promise.reject(error);
+      },
+    );
+  }, [dispatch]);
+
+  useEffect(() => {
     const callback = (data: any) => {
       console.log('here');
       console.log(data);
