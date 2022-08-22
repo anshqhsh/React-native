@@ -37,9 +37,9 @@ function Complete() {
   const [preview, setPreview] = useState<{uri: string}>();
   const accessToken = useSelector((state: RootState) => state.user.accessToken);
 
+  console.log(route, navigation, image);
+
   const onResponse = useCallback(async (response: any) => {
-    console.log('complete');
-    console.log(response);
     console.log(response.width, response.height, response.exif);
     setPreview({uri: `data:${response.mime};base64,${response.data}`});
     const orientation = (response.exif as any)?.Orientation;
@@ -97,19 +97,26 @@ function Complete() {
     const formData = new FormData();
     formData.append('image', image);
     formData.append('orderId', orderId);
+    console.log(formData);
+    console.log('image');
+    console.log(image);
+    console.log('orderId');
+    console.log(orderId);
     try {
+      // 서버 개발자와 약속된 형식으로 header에 토큰을 넣어 보내 준다.
       await axios.post(`${Config.API_URL}/complete`, formData, {
         headers: {
           authorization: `Bearer ${accessToken}`,
         },
       });
       Alert.alert('알림', '완료처리 되었습니다.');
-      navigation.goBack();
+      navigation.goBack(); // 사진화면을 없애기 위해
       navigation.navigate('Settings');
       dispatch(orderSlice.actions.rejectOrder(orderId));
     } catch (error) {
       const errorResponse = (error as AxiosError as any).response;
       if (errorResponse) {
+        console.log(errorResponse);
         Alert.alert('알림', errorResponse.data.message);
       }
     }

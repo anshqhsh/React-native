@@ -4,7 +4,6 @@ import rootReducer from './reducer';
 
 const store = configureStore({
   reducer: rootReducer,
-  // 플리퍼와 연결을 위한 미들웨어
   middleware: getDefaultMiddleware => {
     if (__DEV__) {
       const createDebugger = require('redux-flipper').default;
@@ -15,7 +14,5 @@ const store = configureStore({
 });
 export default store;
 
-// ts
 export type AppDispatch = typeof store.dispatch;
-// wrapping ts 때문에
 export const useAppDispatch = () => useDispatch<AppDispatch>();

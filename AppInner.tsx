@@ -25,7 +25,6 @@ export type LoggedInParamList = {
   Delivery: undefined;
   Complete: {orderId: string};
 };
-
 export type RootStackParamList = {
   SignIn: undefined;
   SignUp: undefined;
@@ -37,6 +36,7 @@ const Stack = createNativeStackNavigator();
 function AppInner() {
   const dispatch = useAppDispatch();
   const isLoggedIn = useSelector((state: RootState) => !!state.user.email);
+
   const [socket, disconnect] = useSocket();
 
   usePermissions();
@@ -46,7 +46,6 @@ function AppInner() {
     const getTokenAndRefresh = async () => {
       try {
         const token = await EncryptedStorage.getItem('refreshToken');
-        console.log({token});
         if (!token) {
           return;
         }
@@ -78,7 +77,6 @@ function AppInner() {
 
   useEffect(() => {
     const callback = (data: any) => {
-      console.log(data);
       dispatch(orderSlice.actions.addOrder(data));
     };
     if (socket && isLoggedIn) {
@@ -112,6 +110,7 @@ function AppInner() {
         if (status === 419) {
           if (error.response.data.code === 'expired') {
             const originalRequest = config;
+            console.log(originalRequest);
             const refreshToken = await EncryptedStorage.getItem('refreshToken');
             // token refresh 요청
             const {data} = await axios.post(
@@ -141,7 +140,7 @@ function AppInner() {
       <Tab.Screen
         name="Delivery"
         component={Delivery}
-        options={{title: '내 오더'}}
+        options={{headerShown: false}}
       />
       <Tab.Screen
         name="Settings"

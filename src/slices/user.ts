@@ -22,7 +22,6 @@ const userSlice = createSlice({
       state.money = action.payload;
     },
   },
-  // extraReducers: builder => {},
 });
 
 export default userSlice;
