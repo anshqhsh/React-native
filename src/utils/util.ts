@@ -1,4 +1,4 @@
-// 출발지 위도 경도로 거리를 잼 
+// 출발지 위도 경도로 거리를 잼
 function getDistanceFromLatLonInKm(
   lat1: number,
   lon1: number,
